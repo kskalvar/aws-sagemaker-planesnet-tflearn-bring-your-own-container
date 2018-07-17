@@ -1,0 +1,2 @@
+Download planesnet.json here!  The latest version of planesnet.json is available through the PlanesNet Kaggle page, which has further information describing the dataset layout.
+https://www.kaggle.com/rhammell/planesnet
