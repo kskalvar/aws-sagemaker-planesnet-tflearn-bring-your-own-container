@@ -42,7 +42,7 @@ The subdirectory local-test contains scripts and sample data for testing the bui
 * __serve-local.sh__: Instantiate the container configured for serving.
 * __predict.sh__: Run predictions against a locally instantiated server.
 * __test-dir__: The directory that gets mounted into the container with test data mounted in all the places that match the container schema.
-* __payload.csv__: Sample data for used by predict.sh for testing the server.
+* __scene_1.png__: Sample data for used by predict.sh for testing the server.
 
 #### The directory tree mounted into the container
 
