@@ -87,7 +87,7 @@ class ScoringService(object):
             i = int(i - win/2)
             j = int(j - win/2)
             
-            # Draw bouding boxes in output array
+            # Draw bounding boxes in output array
             output[i:i+win, j:j+2, 0:3] = [255,0,0]
             output[i:i+win, j+win-2:j+win, 0:3] = [255,0,0]
             output[i:i+2, j:j+win, 0:3] = [255,0,0]
