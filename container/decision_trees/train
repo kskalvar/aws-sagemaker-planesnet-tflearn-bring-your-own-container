@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import os
+import sys
+import json
+import numpy as np
+from tflearn.data_utils import to_categorical
+from model import model
+
+prefix = '/opt/ml/'
+input_path = prefix + 'input/data'
+output_path = os.path.join(prefix, 'output')
+model_path = os.path.join(prefix, 'model')
+param_path = os.path.join(prefix, 'input/config/hyperparameters.json')
+
+# This algorithm has a single channel of input data called 'training'. Since we run in
+# File mode, the input files are copied to the directory specified here.
+channel_name='training'
+training_path = os.path.join(input_path, channel_name)
+
+def train():
+
+    print ('planesnet training ', training_path)
+    try:
+        # Read in any hyperparameters that the user passed with the training job
+        with open(param_path, 'r') as tc:
+            trainingParams = json.load(tc)
+
+        # Take the set of files and read them all into a single pandas dataframe
+        input_file = os.path.join(training_path, 'planesnet.json')
+        if len(input_file) == 0:
+            raise ValueError(('There are no files in {}.\n' +
+                              'This usually indicates that the channel ({}) was incorrectly specified,\n' +
+                              'the data specification in S3 was incorrectly specified or the role specified\n' +
+                              'does not have permission to access the data.').format(training_path, channel_name))
+
+        print ('input_file ', input_file)
+        f = open(input_file)
+        planesnet = json.load(f)
+        f.close()
+    
+        # Preprocess image data and labels for input
+        X = np.array(planesnet['data']) / 255.
+        X = X.reshape([-1,3,20,20]).transpose([0,2,3,1])
+        Y = np.array(planesnet['labels'])
+        Y = to_categorical(Y, 2)
+    
+        # Train the model
+        model.fit(X, Y, n_epoch=50, shuffle=True, validation_set=.2,
+              show_metric=True, batch_size=128, run_id='planesnet')
+        
+        # Save trained model
+        os.chdir(prefix)
+        model.save("model/model.tfl")
+
+        print('Training complete.')
+    except Exception as e:
+        # Printing this causes the exception to be in the training job logs, as well.
+        print('Exception during training: ' + str(e) + '\n', file=sys.stderr)
+        sys.exit(255)
+
+# Main function
+if __name__ == "__main__":
+
+    # Train using input file
+    train()
