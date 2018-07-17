@@ -49,7 +49,7 @@ The subdirectory local-test contains scripts and sample data for testing the bui
 The tree under test-dir is mounted into the container and mimics the directory structure that SageMaker would create for the running container during training or hosting.
 
 * __input/config/hyperparameters.json__: The hyperparameters for the training job.
-* __input/data/training/planesnet.json__: The training data.
+* __input/data/training/planesnet.json__: The training data.  The latest version of planesnet.json is available through the PlanesNet Kaggle page, which has further information describing the dataset layout.  https://www.kaggle.com/rhammell/planesnet
 * __model__: The directory where the algorithm writes the model file.
 * __output__: The directory where the algorithm can write its success or failure file.
 
