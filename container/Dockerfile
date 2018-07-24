@@ -11,12 +11,11 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
-    pip install numpy scipy scikit-learn pandas flask gevent gunicorn && \
+    pip install numpy==1.14.0 scipy scikit-learn pandas flask gevent gunicorn && \
         (cd /usr/local/lib/python2.7/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
 
 RUN pip install tensorflow==1.5 tflearn h5py
-
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
@@ -25,4 +24,3 @@ ENV PATH="/opt/program:${PATH}"
 # Set up the program in the image
 COPY decision_trees /opt/program
 WORKDIR /opt/program
-
