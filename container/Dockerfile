@@ -4,18 +4,18 @@
 
 FROM ubuntu:16.04
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
-         wget \
+         wget vim \
          python \
          nginx \
          ca-certificates \
     && rm -rf /var/lib/apt/lists/*
-
+    
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
     pip install numpy==1.14.0 scipy scikit-learn pandas flask gevent gunicorn && \
         (cd /usr/local/lib/python2.7/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
 
-RUN pip install tensorflow==1.5 tflearn h5py
+RUN pip install tensorflow==1.5 tflearn h5py hickle
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
