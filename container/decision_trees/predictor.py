@@ -35,6 +35,8 @@ class ScoringService(object):
 
     @classmethod
     def get_model(cls):
+        
+        print('ScoringService::get_model')
         """Get the model object for this instance, loading it if it's not already loaded."""
         if cls.model == None:
            cls.model = tfmodel
@@ -44,6 +46,7 @@ class ScoringService(object):
     @classmethod
     def predict(cls, chip):
  
+        print('ScoringService::predict')
         clf = cls.get_model()
         cls.prediction = clf.predict_label([chip / 255.])[0][0]
            
@@ -55,6 +58,8 @@ app = flask.Flask(__name__)
 
 @app.route('/ping', methods=['GET'])
 def ping():
+    
+    print('predictor::ping')
         
     """Determine if the container is working and healthy. In this sample container, we declare
     it healthy if we can load the model successfully."""
@@ -66,12 +71,16 @@ def ping():
 @app.route('/invocations', methods=['POST'])
 def transformation():
     
+    
+    print('predictor::transformation')
+    
     now = datetime.datetime.now()
     filename = '/tmp/flask-stream-tflearn-%s' % now.isoformat()
     
     with open(filename, "w") as f:
         chunk = flask.request.stream.read()
         f.write(chunk)
+        f.close()
     
     chip = hickle.load(filename)
     prediction = ScoringService.predict(chip)
