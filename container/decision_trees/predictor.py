@@ -71,6 +71,7 @@ def ping():
 @app.route('/invocations', methods=['POST'])
 def transformation():
     
+    prediction = None
     
     print('predictor::transformation')
     
@@ -82,11 +83,7 @@ def transformation():
         f.write(chunk)
         f.close()
     
-    chip = hickle.load(filename)
+    chip = np.load(filename)
     prediction = ScoringService.predict(chip)
-    result = 'transformation prediction: %s' % prediction
     
-    if os.path.exists(filename):
-       os.remove(filename)
-
-    return flask.Response(response=result, status=200, mimetype='text/plain')
+    return flask.Response(response=prediction, status=200, mimetype='text/plain')
