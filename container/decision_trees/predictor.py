@@ -17,8 +17,6 @@ from PIL import Image
 from scipy import ndimage
 from model import model as tfmodel
 
-import hickle
-
 prefix = '/opt/ml/'
 model_path = os.path.join(prefix, 'model')
 tfmodel.load('/opt/ml/model/model.tfl')
