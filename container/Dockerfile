@@ -15,7 +15,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
         (cd /usr/local/lib/python2.7/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
 
-RUN pip install tensorflow==1.5 tflearn
+RUN pip install tensorflow==1.5 tflearn h5py
 
 ENV PYTHONUNBUFFERED=TRUE
 ENV PYTHONDONTWRITEBYTECODE=TRUE
