@@ -17,6 +17,8 @@ from PIL import Image
 from scipy import ndimage
 from model import model as tfmodel
 
+import gzip
+
 prefix = '/opt/ml/'
 model_path = os.path.join(prefix, 'model')
 tfmodel.load('/opt/ml/model/model.tfl')
@@ -77,11 +79,13 @@ def transformation():
     filename = '/tmp/flask-stream-tflearn-%s' % now.isoformat()
     
     with open(filename, "w") as f:
-        chunk = flask.request.stream.read()
+        chunk = flask.request.data
         f.write(chunk)
         f.close()
+
+    f2 = gzip.GzipFile(filename, "r")
     
-    chip = np.load(filename)
+    chip = np.load(f2)
     prediction = ScoringService.predict(chip)
     
     return flask.Response(response=prediction, status=200, mimetype='text/plain')
