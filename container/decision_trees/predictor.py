@@ -19,6 +19,8 @@ from model import model as tfmodel
 
 import gzip
 
+version = 'v11'
+
 prefix = '/opt/ml/'
 model_path = os.path.join(prefix, 'model')
 tfmodel.load('/opt/ml/model/model.tfl')
@@ -59,7 +61,7 @@ app = flask.Flask(__name__)
 @app.route('/ping', methods=['GET'])
 def ping():
     
-    print('predictor::ping')
+    print('predictor::ping-%s' % version)
         
     """Determine if the container is working and healthy. In this sample container, we declare
     it healthy if we can load the model successfully."""
@@ -73,19 +75,13 @@ def transformation():
     
     prediction = None
     
-    print('predictor::transformation')
-    
-    now = datetime.datetime.now()
-    filename = '/tmp/flask-stream-tflearn-%s' % now.isoformat()
-    
-    with open(filename, "w") as f:
-        chunk = flask.request.data
-        f.write(chunk)
-        f.close()
+    print('predictor::transformation-%s' % version)
 
-    f2 = gzip.GzipFile(filename, "r")
-    
-    chip = np.load(f2)
-    prediction = ScoringService.predict(chip)
-    
+    # Convert from CSV to pandas
+    if flask.request.content_type == 'text/csv':
+        data = flask.request.data.decode('utf-8')
+        s = StringIO.StringIO(data)
+    else:
+        return flask.Response(response='This predictor only supports CSV data', status=415, mimetype='text/plain')
+
     return flask.Response(response=prediction, status=200, mimetype='text/plain')
