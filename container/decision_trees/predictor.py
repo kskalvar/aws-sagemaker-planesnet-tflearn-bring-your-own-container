@@ -1,4 +1,3 @@
-
 # This is the file that implements a flask server to do inferences. It's the file that you will modify to
 # implement the scoring for your own algorithm.
 
@@ -17,9 +16,9 @@ from PIL import Image
 from scipy import ndimage
 from model import model as tfmodel
 
-import gzip
+from io import StringIO
 
-version = 'v11'
+version = 'v15'
 
 prefix = '/opt/ml/'
 model_path = os.path.join(prefix, 'model')
@@ -80,7 +79,10 @@ def transformation():
     # Convert from CSV to pandas
     if flask.request.content_type == 'text/csv':
         data = flask.request.data.decode('utf-8')
-        s = StringIO.StringIO(data)
+        s = StringIO(data)
+        chip = np.loadtxt(s).reshape(20, 20, 3)
+        prediction = ScoringService.predict(chip)
+        
     else:
         return flask.Response(response='This predictor only supports CSV data', status=415, mimetype='text/plain')
 
