@@ -1,8 +1,6 @@
 # This is the file that implements a flask server to do inferences. It's the file that you will modify to
 # implement the scoring for your own algorithm.
 
-# ksk this is the original script called by AWS SageMaker
-
 from __future__ import print_function
 
 import flask
@@ -16,9 +14,7 @@ from PIL import Image
 from scipy import ndimage
 from model import model as tfmodel
 
-from io import StringIO
-
-version = 'v15'
+version = 'v1'
 
 prefix = '/opt/ml/'
 model_path = os.path.join(prefix, 'model')
@@ -31,13 +27,13 @@ data = None
 # It has a predict function that does a prediction based on the model and the input data.
 
 class ScoringService(object):
+    
     model = None            # Where we keep the model when it's loaded
     prediction = None
 
     @classmethod
     def get_model(cls):
         
-        print('ScoringService::get_model')
         """Get the model object for this instance, loading it if it's not already loaded."""
         if cls.model == None:
            cls.model = tfmodel
@@ -47,7 +43,6 @@ class ScoringService(object):
     @classmethod
     def predict(cls, chip):
  
-        print('ScoringService::predict')
         clf = cls.get_model()
         cls.prediction = clf.predict_label([chip / 255.])[0][0]
            
@@ -60,10 +55,9 @@ app = flask.Flask(__name__)
 @app.route('/ping', methods=['GET'])
 def ping():
     
-    print('predictor::ping-%s' % version)
-        
     """Determine if the container is working and healthy. In this sample container, we declare
     it healthy if we can load the model successfully."""
+    
     health = ScoringService.get_model() is not None  # You can insert a health check here
 
     status = 200 if health else 404
@@ -78,11 +72,8 @@ def transformation():
 
     # Convert from CSV to pandas
     if flask.request.content_type == 'text/csv':
-        data = flask.request.data.decode('utf-8')
-        s = StringIO(data)
-        chip = np.loadtxt(s).reshape(20, 20, 3)
+        chip = np.fromstring(flask.request.data, dtype=np.uint8).reshape(20, 20, 3)
         prediction = ScoringService.predict(chip)
-        
     else:
         return flask.Response(response='This predictor only supports CSV data', status=415, mimetype='text/plain')
 
