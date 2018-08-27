@@ -7,7 +7,7 @@ This example shows how to package the [TFLearn][tfl] Machine Learning Library fo
 Using Your Own Algorithms with Amazon SageMaker  
 https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
 
-planesnet-detector
+planesnet-detector  
 https://github.com/rhammell/planesnet-detector
 
 
