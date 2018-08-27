@@ -1,9 +1,6 @@
 # AWS Sagemaker Planesnet Tflearn Bring Your Own Container
 
-This example shows how to package a [TFLearn][tfl] algorithm for use with SageMaker. We have chosen a [PlanesNet][planesnet]  implementation of decision trees to illustrate the procedure.
-
-
-
+This example shows how to package the [TFLearn][tfl] Machine Learning Library for use with SageMaker. We have chosen the [PlanesNet][planesnet] planesnet-detector project to illustrate the process of bringing your own tools and algorithms to SageMaker.
 
 ## References
 
