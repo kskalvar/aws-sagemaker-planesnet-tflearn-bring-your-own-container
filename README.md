@@ -1,4 +1,4 @@
-# AWS Sagemaker Planesnet Tflearn Bring Your Own Container
+# AWS SageMaker PlanesNet TFLearn Bring Your Own Container
 
 This example shows how to package the [TFLearn][tfl] Machine Learning Library for use with SageMaker. We have also chosen the [PlanesNet][planesnet] planesnet-detector project implementation which uses TFLearn to detect aircraft in an image and highlighted with a bounding box.
 
