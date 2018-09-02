@@ -1,7 +1,6 @@
 # AWS SageMaker PlanesNet TFLearn Bring Your Own Container
 
-This example shows how to package the [TFLearn][tfl] Machine Learning Library for use with SageMaker. We have also chosen the [PlanesNet][planesnet] planesnet-detector project implementation which uses TFLearn to detect aircraft in an image and highlighted with a bounding box.
-
+This example shows how to package the [TFLearn][tfl] Machine Learning Library for use with SageMaker. TFLearn is not supported by SageMaker currently so we'll need to build a container to support it.  This solution will use the SageMaker Python SDK to build a distributed service to train/deploy/detect.  We have also chosen the [PlanesNet][planesnet] planesnet-detector project implementation which uses TFLearn to detect aircraft in an image and highlighted with a bounding box.
 
 This solution shows how to process satellite imagery using AWS SageMaker and PlanesNet to build an AI Model to predict aircraft. This readme updates an article "Detect airplanes in Planet imagery using machine learning" by Bob Hammell referenced below and provides a more basic step by step process.
 
