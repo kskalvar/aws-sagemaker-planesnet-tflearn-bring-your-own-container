@@ -24,7 +24,7 @@ Click on "Create notebook instance"
 
 ### AWS IAM Dashboard
 Click on "Roles"    
-Click on "AmazonSageMaker-ExecutionRole-<timestamp>"  
+Click on "AmazonSageMaker-ExecutionRole-```<timestamp>```"  
 Click on "Permissions/Attach policies"  
 Enter "EC2" in "Filter policies"
 Select "AmazonEC2ContainerRegistryFullAccess"  
@@ -37,10 +37,15 @@ Actions: Open  # it will show pending until it's ready to open
 
 This will open the Jupyter Notebook in a new tab in your browser.
 
-#### Upload aws-sagemaker-planesnet.ipynb using Jupyter Notebook
-Click on "Upload" and Select "aws-sagemaker-planesnet.ipynb" from project jupyter-notebook directory 
+#### Checkout aws-sagemaker-planesnet-tflearn-bring-your-own-container using Jupyter Notebook
+Click on "New" and Select "terminal"  
+cd SageMaker  
+git clone https://github.com/kskalvar/aws-sagemaker-planesnet-tflearn-bring-your-own-container.git
 
-Once the notebook is uploaded, click on "aws-sagemaker-planesnet.ipynb" to open it.  
+Once the project is downloaded, go back to the Jupyter Notebook/Files  
+Click on directory "aws-sagemaker-planesnet-tflearn-bring-your-own-container"  
+Click on Jupyter Notebook to open it
+
 Run each cell Step by Step
 
 ## References
