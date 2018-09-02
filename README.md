@@ -17,7 +17,7 @@ Notebook instance type: ml.t2.medium
 IAM Role: Create a new role  
 ```
 S3 buckets you specify - optional:
-Select "None"
+Select "Any S3 Bucket"
 Click on "Create role"
 ```
 Click on "Create notebook instance"
