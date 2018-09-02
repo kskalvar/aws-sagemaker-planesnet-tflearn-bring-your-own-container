@@ -22,6 +22,14 @@ Click on "Create role"
 ```
 Click on "Create notebook instance"
 
+### AWS IAM Dashboard
+Click on "Roles"    
+Click on "AmazonSageMaker-ExecutionRole-<timestamp>"  
+Click on "Permissions/Attach policies"  
+Enter "EC2" in "Filter policies"
+Select "AmazonEC2ContainerRegistryFullAccess"  
+Click on "Attach policy"  
+
 #### Display Notebook instances using the SageMaker Dashboard
 Notebook/Notebook instances  
 Name: planesnet  
