@@ -30,14 +30,14 @@ Enter "EC2" in "Filter policies"
 Select "AmazonEC2ContainerRegistryFullAccess"  
 Click on "Attach policy"  
 
-#### Display Notebook instances using the SageMaker Dashboard
+### Display Notebook instances using the SageMaker Dashboard
 Notebook/Notebook instances  
 Name: planesnet  
 Actions: Open  # it will show pending until it's ready to open
 
 This will open the Jupyter Notebook in a new tab in your browser.
 
-#### Checkout aws-sagemaker-planesnet-tflearn-bring-your-own-container using Jupyter Notebook
+### Checkout aws-sagemaker-planesnet-tflearn-bring-your-own-container using Jupyter Notebook
 Click on "New" and Select "terminal"  
 cd SageMaker  
 git clone https://github.com/kskalvar/aws-sagemaker-planesnet-tflearn-bring-your-own-container.git
