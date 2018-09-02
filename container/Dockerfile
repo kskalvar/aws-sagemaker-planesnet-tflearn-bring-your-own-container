@@ -11,7 +11,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
     
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
-    pip install numpy==1.14.0 scipy flask gevent gunicorn tensorflow==1.5 tflearn h5py && \
+    pip install numpy==1.14.0 scipy==1.1.0 flask==1.0.2 gevent==1.3.6 gunicorn==19.9.0 tensorflow==1.5.0 tflearn==0.3.2 h5py==2.8.0 && \
         (cd /usr/local/lib/python2.7/dist-packages/scipy/.libs; rm *; ln ../../numpy/.libs/* .) && \
         rm -rf /root/.cache
 
