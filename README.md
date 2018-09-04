@@ -7,6 +7,7 @@ We'll start a Jupyter Notebook using AWS SageMaker.  We'll then use the Jupyter 
 Steps:  
 Create your AWS SageMaker Jupyter Notebook  
 Open Jupyter Notebook Instance  
+Checkout project from GitHub using Jupyter Notebook  
 Run Jupyter Notebook Steps  
 
 ## Create your AWS SageMaker Jupyter Notebook
@@ -34,14 +35,16 @@ Select "AmazonEC2ContainerRegistryFullAccess"
 Click on "Attach policy"  
 
 ### Open Notebook instance
-Notebook/Notebook instances  
+AWS SageMaker Console  
+Click on Notebook/Notebook instances  
 Name: planesnet  
 Actions: Open  # it will show pending until it's ready to open
 
 This will open the Jupyter Notebook in a new tab in your browser.
 
-## Checkout aws-sagemaker-planesnet-tflearn-bring-your-own-container from GitHub using Jupyter Notebook
-Click on "New" and Select "terminal"  
+## Checkout project from GitHub using Jupyter Notebook
+Click on "New" 
+Select "terminal"  
 cd SageMaker  
 git clone https://github.com/kskalvar/aws-sagemaker-planesnet-tflearn-bring-your-own-container.git
 
