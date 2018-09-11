@@ -48,7 +48,7 @@ Select "terminal"
 cd SageMaker  
 git clone https://github.com/kskalvar/aws-sagemaker-planesnet-tflearn-bring-your-own-container.git
 
-Once the project is downloaded, go back to the Jupyter Notebook/Files  
+Once the project is downloaded, go back to Jupyter Notebook/Files  
 Click on directory "aws-sagemaker-planesnet-tflearn-bring-your-own-container"  
 Click on Jupyter Notebook to open it
 
